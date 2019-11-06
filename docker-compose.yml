@@ -1,0 +1,12 @@
+version: '3'
+services:
+  flask-server:
+    build: .
+    depends_on: 
+      - postgres-db
+    ports:
+      - "8000:5000"
+  postgres-db:
+    image: postgres:10
+    restart: always
+    
