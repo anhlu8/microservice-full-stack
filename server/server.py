@@ -13,6 +13,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
 
 alchemist.init_app(app)
+alchemist.drop_all(app=app)
 alchemist.create_all(app=app)
 
 @app.route('/')

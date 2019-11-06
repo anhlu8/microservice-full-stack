@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import Fab from '@material-ui/core/Fab';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -23,6 +21,7 @@ const getAllName = async () => {
   const result = await axios.get("http://localhost:5000/all")
   return result.data.names
 }
+
 
 class App extends Component {
   state = {
@@ -57,6 +56,14 @@ class App extends Component {
     .then(res => this.setState({names: res}))
   };
 
+  handleEdit = (unique_id) => {
+    console.log("edit id", unique_id)
+  };
+
+  handleDelete = (unique_id) => {
+    console.log("delete id", unique_id)
+  };
+
   render() { 
     return ( 
       <>
@@ -78,35 +85,29 @@ class App extends Component {
             type="text"
             placeholder="Last Name"
           />
-          <button onClick={this.handleFormSubmit}>Submit</button>
-          <button onClick={this.handleGetAll}>Get All</button>
+          <Button size="small" variant="contained" color="primary" onClick={this.handleFormSubmit}>Submit</Button>
+          <Button size="small" variant="contained" color="secondary" onClick={this.handleGetAll}>Get All</Button>
         </form>
-
         <Table aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell align="right"></TableCell>
-                    <TableCell align="right"></TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                {this.state.names.map(i => (
-                    <TableRow key={i.id}>
-                      <TableCell component="th" scope="row">
-                        {`Xin chào ${i.first_name} ${i.last_name} `}
-                      </TableCell>
-                      <TableCell align="right"><Fab color="primary" aria-label="edit">
-                <EditIcon />
-              </Fab></TableCell>
-                      <TableCell align="right"><Fab color="secondary" aria-label="delete">
-                <DeleteIcon />
-              </Fab></TableCell>
-                      
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+          {this.state.names.map((i, index) => {
+              const {first_name, last_name} = i
+              return (
+                <TableRow key={index}>
+                  <TableCell component="th" scope="row">
+                    {`Xin chào ${first_name} ${last_name} `}
+                  </TableCell>
+                </TableRow>
+              )
+            }
+          )}
+          </TableBody>
+        </Table>
       </>
      );
   }

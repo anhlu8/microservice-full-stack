@@ -3,7 +3,7 @@ import datetime
 
 class TodoModel(alchemist.Model):  # This class is for SQLAlchemy alchemist
     __tablename__ = "todo"
-    id = alchemist.Column(alchemist.Integer, primary_key=True)
+    unique_id = alchemist.Column(alchemist.Integer, primary_key=True)
     # date = alchemist.Column(alchemist.DateTime(timezone=True), nullable=False,
     #                         default=datetime.datetime.utcnow)
     # task = alchemist.Column(alchemist.String(
