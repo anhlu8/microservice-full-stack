@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import './App.css';
+import Fab from '@material-ui/core/Fab';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import axios from 'axios';
 
 const getHome = async () => {
@@ -53,9 +60,9 @@ class App extends Component {
   render() { 
     return ( 
       <>
-        {/* <div>
+        <div>
           {this.state.data}
-        </div> */}
+        </div>
         <form className="form">
           <input
             value={this.state.firstName}
@@ -74,9 +81,32 @@ class App extends Component {
           <button onClick={this.handleFormSubmit}>Submit</button>
           <button onClick={this.handleGetAll}>Get All</button>
         </form>
-        <div>
-          {this.state.names.map(i => <div>{`Xin chào ${i.first_name} ${i.last_name}`}</div>)}
-        </div>
+
+        <Table aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell align="right"></TableCell>
+                    <TableCell align="right"></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                {this.state.names.map(i => (
+                    <TableRow key={i.id}>
+                      <TableCell component="th" scope="row">
+                        {`Xin chào ${i.first_name} ${i.last_name} `}
+                      </TableCell>
+                      <TableCell align="right"><Fab color="primary" aria-label="edit">
+                <EditIcon />
+              </Fab></TableCell>
+                      <TableCell align="right"><Fab color="secondary" aria-label="delete">
+                <DeleteIcon />
+              </Fab></TableCell>
+                      
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
       </>
      );
   }
