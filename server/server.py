@@ -8,7 +8,8 @@ from db.models.todoModel import TodoModel
 from db.serializer.marshaller import OneTodoSchema, ManyTodoSchema
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = get_postgres_url()
+app.config['SQLALCHEMY_DATABASE_URI'] = get_postgres_url() #Run this on local
+# app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://{user}:{pw}@{host}/{db}".format(user=os.environ['DBUSER'], pw=os.environ['DBPASS'], host=os.environ['DBHOST'], db=os.environ['DBNAME'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
 

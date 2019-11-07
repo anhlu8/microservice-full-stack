@@ -1,12 +1,18 @@
-version: '3'
+version: '3.3'
 services:
-  flask-server:
+  web_service:
+    container_name: flask_server
+    restart: always
     build: .
     depends_on: 
-      - postgres-db
+      - db_service
     ports:
       - "8000:5000"
-  postgres-db:
-    image: postgres:10
+    volumes:
+      - /Users/anh/Desktop/containerized-app/server
+    environment:
+      - 
+  db_service:
+    image: postgres:latest
     restart: always
     
