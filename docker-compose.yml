@@ -41,7 +41,7 @@ services:
   db: #This is postgres database container
     image: postgres
     volumes: # NOTE research on this
-      - ./data/postgres:/var/lib/postgresql/data
+      - ./mydata/postgres:/var/lib/postgresql/data
     restart: always
     networks: 
       - mynet
