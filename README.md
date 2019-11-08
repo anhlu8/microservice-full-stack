@@ -41,7 +41,7 @@ Successfully ran from local Postgres database
 
 
 # Continuous Improvements:
-* Front-End: PWA, Deploy Build folder to S3, Refactor to use Hooks & TS.
+* Front-End: Include client in container, PWA, Deploy Build folder to S3, Refactor to use Hooks & TS.
 * DevOps: CI/CD
 
 
