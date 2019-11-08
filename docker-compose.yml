@@ -1,27 +1,43 @@
 version: '3'
 services:
-  web:
-    container_name: flask_server
+  client: #This is client react container
+    container_name: react_client
     restart: always
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        - NODE_IMAGE_VERSION=12.2.0-alpine
+    networks: 
+      - mynet
+    ports:
+      - "80:3000"
+    volumes:
+      - ./client:/react
+      - '/react/node_modules'
+
+  web: #This is flask server container
+    container_name: flask_api_server
+    restart: always # NOTE research on this
     build:
       context: ./server
       dockerfile: Dockerfile
       args:
-        - IMAGE_VERSION=3.7.3-stretch
+        - PYTHON_IMAGE_VERSION=3.7.3-stretch
     depends_on: 
       - db
     networks: 
       - mynet
     ports:
-      - "8000:5000"
+      - "5000:5000"
     volumes:
       - /Users/anh/Desktop/containerized-app/server:/flask
     env_file: 
       - .env
 
-  db:
+  db: #This is postgres database container
     image: postgres
-    volumes:
+    volumes: # NOTE research on this
       - ./data/postgres:/var/lib/postgresql/data
     restart: always
     networks: 
