@@ -26,22 +26,22 @@ Successfully ran from local Postgres database
 * ORM: `flask_sqlalchemy`
 * Serializer/Deserializer: `marshmallow_sqlalchemy`
 
-##
+# Usage:
+### To run locally, and use local database:
+- In `server.py`, uncomment line 12 and comment out line 13
+- Create virtual environment and activate it
+- Install requirements
+- Run `python server.py`
+
+### To run in containers (web app container & postgres database container):
+- In `server.py`, uncomment line 13 and comment out line 12
+- Run `docker-compose up -d` at the root
+- Check logs: `docker-compose logs -f`
+- Kill containers: `docker-compose down -d`
+
 
 # Continuous Improvements:
-* Front-End: PWA, Containerize it for local development, Deploy Build folder to S3, Refactor to use Hooks & TS.
-* DevOps: create Makefile, create docker-compose.yml to run Flask/Postgres in containters
+* Front-End: PWA, Deploy Build folder to S3, Refactor to use Hooks & TS.
+* DevOps: CI/CD
 
-
-## Commands:
-docker-compose ps
-docker-compose build
-docker-compose up -d
-docker-compose down
-docker-compose logs -f
-docker-compose stop
-docker-compose start
-docker-compose restart
-docker-compose exec web (this runs command line in that container)
-docker-compose run (start another same container for you to try out commands again that container)
 
