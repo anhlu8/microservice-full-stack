@@ -8,17 +8,17 @@ import TableRow from '@material-ui/core/TableRow';
 import axios from 'axios';
 
 const getHome = async () => {
-  const result = await axios.get("http://localhost:5000/")
+  const result = await axios.get("http://localhost:8000/")
   return result.data
 }
 
 const getName = async (first_name, last_name) => {
-  const result = await axios.post("http://localhost:5000/name", {first_name, last_name})
+  const result = await axios.post("http://localhost:8000/name", {first_name, last_name})
   return result.data
 }
 
 const getAllName = async () => {
-  const result = await axios.get("http://localhost:5000/all")
+  const result = await axios.get("http://localhost:8000/all")
   return result.data.names
 }
 

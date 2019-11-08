@@ -31,3 +31,17 @@ Successfully ran from local Postgres database
 # Continuous Improvements:
 * Front-End: PWA, Containerize it for local development, Deploy Build folder to S3, Refactor to use Hooks & TS.
 * DevOps: create Makefile, create docker-compose.yml to run Flask/Postgres in containters
+
+
+## Commands:
+docker-compose ps
+docker-compose build
+docker-compose up -d
+docker-compose down
+docker-compose logs -f
+docker-compose stop
+docker-compose start
+docker-compose restart
+docker-compose exec web (this runs command line in that container)
+docker-compose run (start another same container for you to try out commands again that container)
+

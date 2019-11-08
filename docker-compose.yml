@@ -1,18 +1,37 @@
-version: '3.3'
+version: '3'
 services:
-  web_service:
+  web:
     container_name: flask_server
     restart: always
-    build: .
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      args:
+        - IMAGE_VERSION=3.7.3-stretch
     depends_on: 
-      - db_service
+      - db
+    networks: 
+      - mynet
     ports:
       - "8000:5000"
     volumes:
-      - /Users/anh/Desktop/containerized-app/server
-    environment:
-      - 
-  db_service:
-    image: postgres:latest
+      - /Users/anh/Desktop/containerized-app/server:/flask
+    env_file: 
+      - .env
+
+  db:
+    image: postgres
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
     restart: always
-    
+    networks: 
+      - mynet
+    environment: 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+networks: 
+  mynet:
+
+volumes:
+  mydata: 
