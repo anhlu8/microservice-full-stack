@@ -4,8 +4,6 @@ FROM node:$NODE_IMAGE_VERSION
 
 WORKDIR /react
 
-COPY package.json /react/
-COPY package-lock.json /react/
 COPY . /react/
 
 RUN npm install --silent
