@@ -1,6 +1,7 @@
 ARG PYTHON_IMAGE_VERSION
 
 FROM python:$PYTHON_IMAGE_VERSION
+# FROM python:3.7.3-stretch
 
 WORKDIR /flask
 
