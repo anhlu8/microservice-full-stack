@@ -1,16 +1,27 @@
+# https://circleci.com/orbs/registry/orb/circleci/aws-ecr
+# https://circleci.com/docs/2.0/ecs-ecr/
+# https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr
+
+
 version: 2.1
-jobs:
-  build:
-    docker:
-      - image: 278749303080.dkr.ecr.us-east-1.amazonaws.com/flask-postgresdb-docker:latest
-
-    steps:
-      - checkout
-
-      - run:
-          name: Greeting
-          command: echo Hello, world.
-
-      - run:
-          name: Print the Current Time
-          command: date
+orbs:
+  aws-ecr: circleci/aws-ecr@6.5.0
+  aws-ecs: circleci/aws-ecs@0.0.10
+workflows:
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
+          aws-access-key-id: ACCESS_KEY_ID_ENV_VAR_NAME
+          aws-secret-access-key: SECRET_ACCESS_KEY_ENV_VAR_NAME
+          region: AWS_REGION_ENV_VAR_NAME
+          repo: '${MY_APP_PREFIX}'
+          create-repo: true
+          tag: '${CIRCLE_SHA1}'
+      # - aws-ecs/deploy-service-update:
+      #     requires:
+      #       - aws-ecr/build-and-push-image
+      #     aws-region: AWS_REGION_ENV_VAR_NAME
+      #     family: '${MY_APP_PREFIX}-service'
+      #     cluster-name: '${MY_APP_PREFIX}-cluster'
+      #     container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
