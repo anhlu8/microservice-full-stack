@@ -1,32 +1,11 @@
 version: '3'
 services:
-  # client: #This is client react container
-  #   container_name: react_client
-  #   restart: always
-  #   build:
-  #     context: ./client
-  #     dockerfile: Dockerfile
-  #     args:
-  #       - NODE_IMAGE_VERSION=8.2.0-alpine
-  #   networks: 
-  #     - mynet
-  #   expose:
-  #     - 3000
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./client:/react
-  #     - /react/node_modules
-  #   links:
-  #     - web
   web: #This is flask server container
     container_name: flask_api_server
-    restart: always # NOTE research on this
+    restart: on-failure
     build:
       context: ./server
       dockerfile: Dockerfile
-      args:
-        - PYTHON_IMAGE_VERSION=3.7.3-stretch
     depends_on: 
       - db
     networks: 
@@ -40,7 +19,7 @@ services:
 
   db: #This is postgres database container
     image: postgres
-    volumes: # NOTE research on this
+    volumes:
       - ./mydata/postgres:/var/lib/postgresql/data
     networks: 
       - mynet

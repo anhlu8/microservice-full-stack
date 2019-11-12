@@ -19,7 +19,7 @@ Successfully run on local & inside Docker container. Succesffuly add volumne (mo
 * `flask_cors`
 
 ### III. Database (Postgres):
-Successfully ran from local Postgres database
+Successfully ran from local Postgres database & inside a Docker container.
 
 * Local database config: server/db/config/postgreSQL.ini
 * Models: Right now only takes first_name, last_name
@@ -39,9 +39,19 @@ Successfully ran from local Postgres database
 - Check logs: `docker-compose logs -f`
 - Kill containers: `docker-compose down -d`
 
+# Connect to Containerized Postgres:
+Make sure local Postgres is stopped.
+- Host name: 0.0.0.0
+- Port: 5432
+- Database: flask
+- Username: postgres
+- Password: example
+
+# To push/update image to AWS ERC:
+Run `aws ecr get-login --no-include-email`, then copy and paste token in Terminal
+Run `./upload-to-ecr.sh`
 
 # Continuous Improvements:
-* Front-End: Include client in container, PWA, Deploy Build folder to S3, Refactor to use Hooks & TS.
+* Front-End: Create PWA, Deploy Build folder to S3, Refactor to use Hooks & TS.
+* Back-End: Create Restful APIs (Right now, it's missing PUT & DELETE)
 * DevOps: CI/CD
-
-
