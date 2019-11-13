@@ -18,7 +18,7 @@ workflows:
           repo: '${MY_APP_PREFIX}'
           create-repo: true
           tag: '${CIRCLE_SHA1}'
-      - aws-ecs/run-task:
+      - aws-ecs/run-task-ec2:
           requires:
             - aws-ecr/build-and-push-image
           aws-region: AWS_REGION_ENV_VAR_NAME
