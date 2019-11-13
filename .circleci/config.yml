@@ -18,7 +18,7 @@ workflows:
           repo: '${MY_APP_PREFIX}'
           create-repo: true
           tag: '${CIRCLE_SHA1}'
-      - aws-ecs/run-task:
+      - aws-ecs/run-task-ec2:
           cluster: '${MY_APP_PREFIX}-cluster'
           task-definition: '${MY_APP_PREFIX}'
           awsvpc: false
