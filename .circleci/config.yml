@@ -21,8 +21,10 @@ workflows:
       - aws-ecs/run-task:
           requires:
             - aws-ecr/build-and-push-image
+          aws-region: AWS_REGION_ENV_VAR_NAME
           cluster: '${MY_APP_PREFIX}-cluster'
           task-definition: '${MY_APP_PREFIX}'
+          launch-type: "EC2"
           awsvpc: false
       - aws-ecs/deploy-service-update:
           requires:
