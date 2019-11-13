@@ -18,14 +18,10 @@ workflows:
           repo: '${MY_APP_PREFIX}'
           create-repo: true
           tag: '${CIRCLE_SHA1}'
-      - run-task:
-          docker:
-            - image: 'circleci/python:3.7.1'
-          steps:
-            - aws-ecs/run-task:
-                cluster: '${MY_APP_PREFIX}-cluster'
-                task-definition: '${MY_APP_PREFIX}'
-                awsvpc: false
+      - aws-ecs/run-task:
+          cluster: '${MY_APP_PREFIX}-cluster'
+          task-definition: '${MY_APP_PREFIX}'
+          awsvpc: false
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
